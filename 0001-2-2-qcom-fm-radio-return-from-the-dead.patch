@@ -1,0 +1,48 @@
+From 2edf66909117e394efa80fe3ef0a917ed8dd07ee Mon Sep 17 00:00:00 2001
+From: faust93 <monumentum@gmail.com>
+Date: Thu, 15 Jan 2015 15:42:43 +0300
+Subject: [PATCH] [2/2] qcom fm radio return from the dead
+
+Change-Id: I786237886f8e906fba75559c182d38bc9f4ec307
+---
+ include/hardware/audio.h        | 1 +
+ include/hardware/audio_policy.h | 6 ++++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/include/hardware/audio.h b/include/hardware/audio.h
+index 0f16484..334786e 100644
+--- a/include/hardware/audio.h
++++ b/include/hardware/audio.h
+@@ -743,6 +743,7 @@ struct audio_hw_device {
+     int (*listen_set_parameters)(struct audio_hw_device *dev,
+                                  const char *kv_pairs);
+ #endif
++    int (*set_fm_volume)(struct audio_hw_device *dev, float volume);
+ };
+ typedef struct audio_hw_device audio_hw_device_t;
+ 
+diff --git a/include/hardware/audio_policy.h b/include/hardware/audio_policy.h
+index bfaef3b..eb16283 100644
+--- a/include/hardware/audio_policy.h
++++ b/include/hardware/audio_policy.h
+@@ -337,11 +337,17 @@ struct audio_policy_service_ops {
+                              audio_io_handle_t output,
+                              int delay_ms);
+ 
++
+     /* reroute a given stream type to the specified output */
+     int (*set_stream_output)(void *service,
+                              audio_stream_type_t stream,
+                              audio_io_handle_t output);
+ 
++    /* set fm audio volume. */
++    int (*set_fm_volume)(void *service,
++    float volume,
++    int delay_ms);
++
+     /* function enabling to send proprietary informations directly from audio
+      * policy manager to audio hardware interface. */
+     void (*set_parameters)(void *service,
+-- 
+1.9.3 (Apple Git-50)
+

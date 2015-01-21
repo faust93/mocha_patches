@@ -1,0 +1,31 @@
+From 2bbd42173b7fc63fd48549e870a4fd0fcedc0c03 Mon Sep 17 00:00:00 2001
+From: faust93 <monumentum@gmail.com>
+Date: Sun, 11 Jan 2015 01:12:09 +0300
+Subject: [PATCH] we have all-in-one supplicant so no neeed for separate p2p
+ service
+
+Change-Id: I4487d629bd91422ce824aa82347d4247f1b83743
+---
+ wifi/wifi.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/wifi/wifi.c b/wifi/wifi.c
+index d94b4a9..e73eb14 100644
+--- a/wifi/wifi.c
++++ b/wifi/wifi.c
+@@ -125,11 +125,11 @@ static const char FIRMWARE_LOADER[]     = WIFI_FIRMWARE_LOADER;
+ static const char DRIVER_PROP_NAME[]    = "wlan.driver.status";
+ static const char SUPPLICANT_NAME[]     = "wpa_supplicant";
+ static const char SUPP_PROP_NAME[]      = "init.svc.wpa_supplicant";
+-static const char P2P_SUPPLICANT_NAME[] = "p2p_supplicant";
+-static const char P2P_PROP_NAME[]       = "init.svc.p2p_supplicant";
++static const char P2P_SUPPLICANT_NAME[] = "wpa_supplicant";
++static const char P2P_PROP_NAME[]       = "init.svc.wpa_supplicant";
+ static const char SUPP_CONFIG_TEMPLATE[]= "/system/etc/wifi/wpa_supplicant.conf";
+ static const char SUPP_CONFIG_FILE[]    = "/data/misc/wifi/wpa_supplicant.conf";
+ static const char CONTROL_IFACE_PATH[]  = "/data/misc/wifi/sockets";
+ static const char MODULE_FILE[]         = "/proc/modules";
+ 
+-- 
+1.9.3 (Apple Git-50)
+

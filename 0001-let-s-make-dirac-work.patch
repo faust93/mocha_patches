@@ -1,0 +1,27 @@
+From ac6832e88384fe1052c92396d868fa929cd0739a Mon Sep 17 00:00:00 2001
+From: faust93 <monumentum@gmail.com>
+Date: Sat, 17 Jan 2015 21:41:54 +0300
+Subject: [PATCH] let's make dirac work
+
+Change-Id: I8a103334e9590e9f5ac3169a96b2c056c85ff4d2
+---
+ services/audioflinger/AudioFlinger.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/services/audioflinger/AudioFlinger.cpp b/services/audioflinger/AudioFlinger.cpp
+index c880384..2504a63 100644
+--- a/services/audioflinger/AudioFlinger.cpp
++++ b/services/audioflinger/AudioFlinger.cpp
+@@ -2640,7 +2640,8 @@ sp<IEffect> AudioFlinger::createEffect(
+                     ALOGW("createEffect() error %d from EffectQueryEffect", lStatus);
+                     continue;
+                 }
+-                if (memcmp(&desc.type, &pDesc->type, sizeof(effect_uuid_t)) == 0) {
++		// dirty hack to make dirac plugin work
++                if (memcmp(&desc.type, &pDesc->type, sizeof(effect_uuid_t)) == 0 || (desc.type.timeLow == 0xf46b26a0 && pDesc->type.timeLow == 0xe069d9e0)) {
+                     // If matching type found save effect descriptor. If the session is
+                     // 0 and the effect is not auxiliary, continue enumeration in case
+                     // an auxiliary version of this effect type is available
+-- 
+1.9.3 (Apple Git-50)
+
